@@ -55,6 +55,8 @@ public abstract class Veiculo implements Exibir {
 
     public abstract double declararValorAluguel();
 
+    public abstract double calcularValorAluguel();
+
     @Override
     public String exibir() {
         return "Placa: " + getPlaca() + " | " +
