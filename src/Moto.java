@@ -6,6 +6,17 @@ public class Moto extends Veiculo {
 
     @Override
     public double declararValorAluguel() {
-        return 0;
+        return 50.0; 
+    }
+
+    @Override
+    public double calcularValorAluguel() {
+        return declararValorAluguel() + 15.0; 
+    }
+
+    @Override
+    public String exibir() {
+        return super.exibir() + " | Diária: R$ " + String.format("%.2f", declararValorAluguel()) + 
+               " | Com Taxa de Equipamento: R$ " + String.format("%.2f", calcularValorAluguel());
     }
 }

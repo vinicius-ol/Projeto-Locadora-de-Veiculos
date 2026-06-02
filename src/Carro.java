@@ -16,7 +16,12 @@ public class Carro extends Veiculo {
 
     @Override
     public double declararValorAluguel() {
-        return 0;
+        return 100.0; 
+    }
+
+    @Override
+    public double calcularValorAluguel() {
+        return declararValorAluguel() + (declararValorAluguel() * 0.10); 
     }
 
     @Override
