@@ -65,8 +65,29 @@ public class Menu {
 
         Cliente cliente = new Cliente(nome, email, cpf);
         locadora.cadastrarCliente(cliente);
-        System.out.println("Cliente cadastrado com sucesso!");
+
+        System.out.println("\nCliente cadastrado com sucesso!");
         System.out.println(cliente.exibir());
+        System.out.println("Locadora: " + locadora.getNome());
+        System.out.println("Endereço: " + locadora.getLocalizacao());
+
+        System.out.print("\nDeseja escolher um veículo agora? (1 - Sim / 2 - Não): ");
+        int opcao = lerInteiro();
+
+        if (opcao == 1) {
+            System.out.print("CNH (habilitação): ");
+            String cnh = scanner.nextLine();
+
+            if (cnh.trim().isEmpty()) {
+                System.out.println("CNH inválida. Escolha de veículo cancelada.");
+                return;
+            }
+
+            Veiculo veiculo = selecionarVeiculo();
+            if (veiculo != null) {
+                exibirConfirmacaoAluguel(cliente, veiculo);
+            }
+        }
     }
 
     private void menuAlugarVeiculo() {
@@ -89,11 +110,18 @@ public class Menu {
             return;
         }
 
+        Veiculo veiculo = selecionarVeiculo();
+        if (veiculo != null) {
+            exibirConfirmacaoAluguel(cliente, veiculo);
+        }
+    }
+
+    private Veiculo selecionarVeiculo() {
         List<Veiculo> disponiveis = locadora.buscarDisponiveis();
 
         if (disponiveis.isEmpty()) {
             System.out.println("Nenhum veículo disponível no momento.");
-            return;
+            return null;
         }
 
         System.out.println("\n--- Veículos disponíveis ---");
@@ -111,7 +139,7 @@ public class Menu {
 
         if (opcoes.isEmpty()) {
             System.out.println("Nenhum veículo disponível para o tipo selecionado.");
-            return;
+            return null;
         }
 
         for (int i = 0; i < opcoes.size(); i++) {
@@ -123,16 +151,22 @@ public class Menu {
 
         if (escolha < 1 || escolha > opcoes.size()) {
             System.out.println("Veículo inválido.");
-            return;
+            return null;
         }
 
-        Veiculo veiculo = opcoes.get(escolha - 1);
+        return opcoes.get(escolha - 1);
+    }
+
+    private void exibirConfirmacaoAluguel(Cliente cliente, Veiculo veiculo) {
         double valor = locadora.realizarAluguel(veiculo, cliente);
 
-        System.out.println("\nAluguel realizado com sucesso!");
-        System.out.println(cliente.exibir());
+        System.out.println("\n========== Comprovante de Aluguel ==========");
+        System.out.println("Cliente:  " + cliente.exibir());
+        System.out.println("Veículo:  " + veiculo.exibir());
+        System.out.println("Locadora: " + locadora.getNome());
+        System.out.println("Endereço: " + locadora.getLocalizacao());
         System.out.println("Valor da diária: R$ " + String.format("%.2f", valor));
-        System.out.println("Retire o veículo em: " + locadora.getLocalizacao());
+        System.out.println("============================================");
     }
 
     private void menuConsultarVeiculos() {
