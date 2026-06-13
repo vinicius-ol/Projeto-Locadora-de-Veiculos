@@ -282,13 +282,10 @@ Rental confirmed. See you at the agency!
 
 ## Team
 
-| Role | Scope |
-|---|---|
-| **Arquiteto / Integrador** | `Veiculo` (abstract class) · `Exibivel` (interface) · codebase integration · Git |
-| **Dev Carro** | `Carro` — attributes, `calcularValorAluguel()`, `exibir()` override |
-| **Dev Moto** | `Moto` — `calcularValorAluguel()` |
-| **Dev Cliente + Validação** | `Cliente` — attributes, `exibir()` · document and license verification logic |
-| **Dev Fluxo / Main** | `while` menu loop · rental workflow · `Main.java` |
+- Luis Felipe Nepomuceno de Moraes
+- João Paulo dos Santos Moreira
+- Leonardo Silva Lima
+- Eric Souza dos Santos
 
 ---
 
